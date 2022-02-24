@@ -3,6 +3,9 @@
  * @author Jakin687
  * @version 1.1.1
  * @description Plugin that adds a QuickReaction-Button
+ * @website https://github.com/Jakin687/BetterDiscordQuickReactions/tree/master
+ * @source https://raw.githubusercontent.com/Jakin687/BetterDiscordQuickReactions/master/QuickReactions.plugin.js
+ * @updateUrl https://raw.githubusercontent.com/Jakin687/BetterDiscordQuickReactions/master/QuickReactions.plugin.js
  */
 
 
@@ -12,11 +15,14 @@ module.exports = (() => {
             name: "QuickReaction",
             authors: [{
                     name: "Jakin687",
-                    discrod_id: 387607262778359828
+                    discrod_id: 387607262778359828,
+                    github_username: "Jakin687"
                 }
             ],
             version: "1.1.1",
-            description: "Plugin that adds a QuickReaction-Button"
+            description: "Plugin that adds a QuickReaction-Button",
+            github: "https://github.com/Jakin687/BetterDiscordQuickReactions/blob/master/QuickReactions.plugin.js",
+            github_raw: "https://raw.githubusercontent.com/Jakin687/BetterDiscordQuickReactions/master/QuickReactions.plugin.js"
         },
         changelog: [
             {
@@ -53,7 +59,7 @@ module.exports = (() => {
                 { DiscordModules, DiscordAPI, PluginUtilities } = Api,
                 { Patcher, Settings, Tooltip, ReactComponents } = Library,
                 { React, ReactDOM } = BdApi;
-            
+
             const ButtonClassesModule = BdApi.findModuleByProps('button', 'contents');
             const ButtonContainerClassesModule = BdApi.findModuleByProps('buttonContainer', 'buttons');
             const ButtonWrapperClassesModule = BdApi.findModuleByProps('buttonWrapper', 'buttonContent');
@@ -72,7 +78,7 @@ module.exports = (() => {
                     this.defaultSettings = {
                         emoji: "👍"
                     }
-                
+
                     this.settings = PluginUtilities.loadSettings(this.getName());
 
                     if (this.settings.emoji == undefined) {
@@ -124,7 +130,7 @@ module.exports = (() => {
                                     // Private Channels: .selected-3veCBZ
                                     let channel_id = null;
                                     let message_id = null;
-                                    
+
                                     try {
                                         channel_id = document.querySelector(".selected-2TbFuo").firstChild.firstChild.firstChild.getAttribute("data-list-item-id").substring(11);
                                         message_id = document.querySelector(".messagesWrapper-RpOMA3").firstChild.firstChild.firstChild.lastChild.previousSibling.id.substring(14);
@@ -138,7 +144,7 @@ module.exports = (() => {
                                             return;
                                         }
                                     }
-                                    
+
                                     this.toast(this.settings.emoji);
                                     this.addReaction(channel_id, message_id, this.settings.emoji);
                                 })
