@@ -1,7 +1,7 @@
 /**
- * @name QuickReaction
+ * @name QuickReactions
  * @author Jakin687
- * @version 1.1.1
+ * @version 1.1.2
  * @description Plugin that adds a QuickReaction-Button
  * @website https://github.com/Jakin687/BetterDiscordQuickReactions/tree/master
  * @source https://raw.githubusercontent.com/Jakin687/BetterDiscordQuickReactions/master/QuickReactions.plugin.js
@@ -9,24 +9,24 @@
  */
 
 
-module.exports = (() => {
+ module.exports = (() => {
     const config = {
         info: {
-            name: "QuickReaction",
+            name: "QuickReactions",
             authors: [{
                     name: "Jakin687",
                     discrod_id: 387607262778359828,
                     github_username: "Jakin687"
                 }
             ],
-            version: "1.1.1",
+            version: "1.1.2",
             description: "Plugin that adds a QuickReaction-Button",
             github: "https://github.com/Jakin687/BetterDiscordQuickReactions/blob/master/QuickReactions.plugin.js",
             github_raw: "https://raw.githubusercontent.com/Jakin687/BetterDiscordQuickReactions/master/QuickReactions.plugin.js"
         },
         changelog: [
             {
-                "title": "Private update", "items": ["Button is now working for direct messages!"]
+                "title": "Private update 2", "items": ["Button is now really working for direct messages!"]
             }
         ],
         main: 'index.js',
@@ -128,6 +128,7 @@ module.exports = (() => {
                                 onClick: ((e) => {
                                     // Public Channels : .selected-2TbFuo
                                     // Private Channels: .selected-3veCBZ
+
                                     let channel_id = null;
                                     let message_id = null;
 
@@ -136,7 +137,8 @@ module.exports = (() => {
                                         message_id = document.querySelector(".messagesWrapper-RpOMA3").firstChild.firstChild.firstChild.lastChild.previousSibling.id.substring(14);
                                     }catch(err) {
                                         try {
-                                            channel_id = document.querySelector(".selected-3veCBZ").firstChild.getAttribute("data-list-item-id").substring(28);
+                                            channel_id = document.querySelector(".selected-3veCBZ").firstChild.getAttribute("data-list-item-id");// 27
+                                            channel_id = channel_id.substring(channel_id.lastIndexOf("_")+1);
                                             message_id = document.querySelector(".messagesWrapper-RpOMA3").firstChild.firstChild.firstChild.lastChild.previousSibling.id.substring(14);
                                         }catch(err2) {
                                             this.toast("Something went wrong!");
@@ -144,9 +146,8 @@ module.exports = (() => {
                                             return;
                                         }
                                     }
-
-                                    this.toast(this.settings.emoji);
                                     this.addReaction(channel_id, message_id, this.settings.emoji);
+                                    this.toast(this.settings.emoji);
                                 })
                             },
                                 BdApi.React.createElement("div", { className: `quickReactionButtonContainer ${ButtonClassesModule.contents} ${ButtonWrapperClassesModule.button} ${ButtonContainerClassesModule.button}` },
